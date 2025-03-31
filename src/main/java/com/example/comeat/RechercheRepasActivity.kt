@@ -1,6 +1,8 @@
 package com.example.comeat
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -15,6 +17,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class RechercheRepasActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,5 +74,15 @@ class RechercheRepasActivity : AppCompatActivity() {
             )
             datePickerDialog.show()
         }
+
+        //Validation et navigation
+        val btnValider: Button = findViewById( R.id.valider )
+        btnValider.setOnClickListener {
+            val intent = Intent( this , ListeRepasActivity::class.java)
+            intent.putExtra( "specialite_repas" , specialiteRepas )
+            intent.putExtra( "date_repas" , dateRepas.toString() )
+            startActivity( intent )
+        }
+
     }
 }
